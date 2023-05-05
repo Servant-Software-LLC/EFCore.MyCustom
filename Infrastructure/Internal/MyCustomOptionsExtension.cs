@@ -34,8 +34,6 @@ public class MyCustomOptionsExtension : RelationalOptionsExtension
     }
 
     protected override RelationalOptionsExtension Clone()
-    {
-        return new MyCustomOptionsExtension(_connectionString);
-    }
+        => new MyCustomOptionsExtension(_connectionString);
 
 }
