@@ -11,7 +11,6 @@ public static class MyCustomServiceCollectionExtensions
     {
         var builder = new EntityFrameworkRelationalServicesBuilder(serviceCollection)
             .TryAdd<IRelationalTypeMappingSource, MyCustomTypeMappingSource>()
-
 ;
 
         builder.TryAddCoreServices();
