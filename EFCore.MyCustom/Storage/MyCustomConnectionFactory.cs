@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using MySql.Data.MySqlClient;
+﻿using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Data.Common;
 
 namespace EFCore.MyCustom.Storage;
@@ -17,6 +17,6 @@ internal class MyCustomConnectionFactory : IRelationalConnectionFactory
 
     public DbConnection CreateConnection()
     {
-        return new MySqlConnection(_connectionString);
+        return new SqliteConnection(_connectionString);
     }
 }

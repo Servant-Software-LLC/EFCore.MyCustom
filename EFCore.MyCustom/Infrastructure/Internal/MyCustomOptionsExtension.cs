@@ -1,4 +1,5 @@
 ﻿using EFCore.MyCustom.Storage;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,14 +8,16 @@ namespace EFCore.MyCustom.Infrastructure.Internal;
 
 public class MyCustomOptionsExtension : RelationalOptionsExtension
 {
-    private string _connectionString;
+    private MyCustomOptionsExtensionInfo? _info;
 
-    public MyCustomOptionsExtension(string connectionString)
+    public MyCustomOptionsExtension() { }
+    protected MyCustomOptionsExtension(MyCustomOptionsExtension copyFrom)
+        : base(copyFrom)
     {
-        _connectionString = connectionString;
+        
     }
 
-    public override DbContextOptionsExtensionInfo Info => throw new NotImplementedException();
+    public override DbContextOptionsExtensionInfo Info => _info ??= new MyCustomOptionsExtensionInfo(this);
 
     public override void ApplyServices(IServiceCollection services)
     {
@@ -22,8 +25,10 @@ public class MyCustomOptionsExtension : RelationalOptionsExtension
         services.AddSingleton<IRelationalConnectionFactory>(provider =>
         {
             var typeMapper = provider.GetService<IRelationalTypeMappingSource>();
-            return new MyCustomConnectionFactory(_connectionString, typeMapper);
+            return new MyCustomConnectionFactory(ConnectionString, typeMapper);
         });
+
+        
     }
        
 
@@ -33,7 +38,30 @@ public class MyCustomOptionsExtension : RelationalOptionsExtension
         // You can add any validation logic here, if necessary.
     }
 
-    protected override RelationalOptionsExtension Clone()
-        => new MyCustomOptionsExtension(_connectionString);
+    protected override RelationalOptionsExtension Clone() => new MyCustomOptionsExtension(this);
+
+
+    public class MyCustomOptionsExtensionInfo : DbContextOptionsExtensionInfo
+    {
+        public MyCustomOptionsExtensionInfo(MyCustomOptionsExtension extension)
+            : base(extension)
+        {
+        }
+
+        public override bool IsDatabaseProvider => true;
+
+        public override string LogFragment => $"Using Custom SQLite Provider - ConnectionString: {Extension.ConnectionString}";
+
+        public override int GetServiceProviderHashCode() => Extension.ConnectionString.GetHashCode();
+
+        public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other) => other is MyCustomOptionsExtensionInfo;
+
+        public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
+        {
+            debugInfo["MyCustom:ConnectionString"] = Extension.ConnectionString;
+        }
+
+        public override MyCustomOptionsExtension Extension => (MyCustomOptionsExtension)base.Extension;
+    }
 
 }
