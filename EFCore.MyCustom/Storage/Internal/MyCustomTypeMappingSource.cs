@@ -21,47 +21,27 @@ public class MyCustomTypeMappingSource : RelationalTypeMappingSource
         {
             switch (storeTypeName.ToLowerInvariant())
             {
-                case "int":
-                    return new IntTypeMapping("int", System.Data.DbType.Int32);
-                case "tinyint":
-                    return new ByteTypeMapping("tinyint", System.Data.DbType.Byte);
-                case "smallint":
-                    return new ShortTypeMapping("smallint", System.Data.DbType.Int16);
-                case "bigint":
-                    return new LongTypeMapping("bigint", System.Data.DbType.Int64);
-                case "varchar":
-                    return new StringTypeMapping(storeTypeName, System.Data.DbType.String);
-                case "datetime":
-                    return new DateTimeTypeMapping("datetime", System.Data.DbType.DateTime);
-                case "float":
-                    return new FloatTypeMapping("float", System.Data.DbType.Single);
-                case "double":
-                    return new DoubleTypeMapping("double", System.Data.DbType.Double);
-                case "decimal":
-                    return new DecimalTypeMapping("decimal", System.Data.DbType.Decimal);
+                case "integer":
+                    return new IntTypeMapping("INTEGER", System.Data.DbType.Int32);
+                case "real":
+                    return new DoubleTypeMapping("REAL", System.Data.DbType.Double);
+                case "text":
+                    return new StringTypeMapping("TEXT", System.Data.DbType.String);
+                case "blob":
+                    return new ByteArrayTypeMapping("BLOB", System.Data.DbType.Binary);
             }
         }
 
         if (clrType != null)
         {
             if (clrType == typeof(int))
-                return new IntTypeMapping("int", System.Data.DbType.Int32);
-            if (clrType == typeof(short))
-                return new ShortTypeMapping("smallint", System.Data.DbType.Int16);
-            if (clrType == typeof(long))
-                return new LongTypeMapping("bigint", System.Data.DbType.Int64);
-            if (clrType == typeof(byte))
-                return new ByteTypeMapping("tinyint", System.Data.DbType.Byte);
-            if (clrType == typeof(string))
-                return new StringTypeMapping("varchar", System.Data.DbType.String);
-            if (clrType == typeof(DateTime))
-                return new DateTimeTypeMapping("datetime", System.Data.DbType.DateTime);
-            if (clrType == typeof(float))
-                return new FloatTypeMapping("float", System.Data.DbType.Single);
+                return new IntTypeMapping("INTEGER", System.Data.DbType.Int32);
             if (clrType == typeof(double))
-                return new DoubleTypeMapping("double", System.Data.DbType.Double);
-            if (clrType == typeof(decimal))
-                return new DecimalTypeMapping("decimal", System.Data.DbType.Decimal);
+                return new DoubleTypeMapping("REAL", System.Data.DbType.Double);
+            if (clrType == typeof(string))
+                return new StringTypeMapping("TEXT", System.Data.DbType.String);
+            if (clrType == typeof(byte[]))
+                return new ByteArrayTypeMapping("BLOB", System.Data.DbType.Binary);
         }
 
         return base.FindMapping(mappingInfo);
