@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore.MyCustom", "EFCore.MyCustom\EFCore.MyCustom.csproj", "{8A56A268-5406-4F66-B045-2C49CDE1DD09}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore.MyCustom.Tests", "EFCore.MyCustom.Tests\EFCore.MyCustom.Tests.csproj", "{FE90AECF-05CA-4DBB-90DC-8798AC14F961}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8A56A268-5406-4F66-B045-2C49CDE1DD09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A56A268-5406-4F66-B045-2C49CDE1DD09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A56A268-5406-4F66-B045-2C49CDE1DD09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE90AECF-05CA-4DBB-90DC-8798AC14F961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE90AECF-05CA-4DBB-90DC-8798AC14F961}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE90AECF-05CA-4DBB-90DC-8798AC14F961}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE90AECF-05CA-4DBB-90DC-8798AC14F961}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
