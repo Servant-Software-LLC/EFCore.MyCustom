@@ -41,7 +41,7 @@ There will also be 2 extension classes that are used to wire-up the dependency i
 Detailed Implementations
 ------------------------
 
-This section provides sub-sections that walk you through what is required for a basic EF Core Provider. By the end of each sub-section, you should be able to compile your provider. Successful complitation (and passing unit tests, after the first sub-section), helps serve as a checkpoint to indicate that you are properly implementing your provider. The result of completing each sub-section is represented in [branches](https://github.com/Servant-Software-LLC/EFCore.MyCustom/branches) of the [this repo](https://github.com/Servant-Software-LLC/EFCore.MyCustom).
+This section provides sub-sections that walk you through what is required for a basic EF Core Provider. By the end of each sub-section, you should be able to compile your provider. Successful complitation (and passing unit tests, in the last sub-section), helps serve as checkpoints to indicate that you are properly implementing your provider. The result of completing each sub-section is represented in [branches](https://github.com/Servant-Software-LLC/EFCore.MyCustom/branches) of the [this repo](https://github.com/Servant-Software-LLC/EFCore.MyCustom).
 
 ### Options Extension Class (Step #1)
 
