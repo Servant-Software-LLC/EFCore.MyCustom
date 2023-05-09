@@ -20,9 +20,7 @@ public class MyCustomOptionsExtension : RelationalOptionsExtension
 
     public override void ApplyServices(IServiceCollection services)
     {
-        //Will be uncommented in the last step when the Extension classes are created.
-        //services.AddEntityFrameworkMyCustom();
-        
+        services.AddEntityFrameworkMyCustom();        
         services.AddSingleton<IRelationalConnectionFactory>(provider =>
         {
             var typeMapper = provider.GetService<IRelationalTypeMappingSource>();
