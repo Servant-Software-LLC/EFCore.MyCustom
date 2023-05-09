@@ -1,5 +1,4 @@
 ﻿using EFCore.MyCustom.Storage;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
@@ -50,18 +49,21 @@ public class MyCustomOptionsExtension : RelationalOptionsExtension
 
         public override bool IsDatabaseProvider => true;
 
-        public override string LogFragment => $"Using Custom SQLite Provider - ConnectionString: {Extension.ConnectionString}";
+        public override string LogFragment => $"Using Custom SQLite Provider - ConnectionString: {ConnectionString}";
 
-        public override int GetServiceProviderHashCode() => Extension.ConnectionString.GetHashCode();
+        public override int GetServiceProviderHashCode() => ConnectionString.GetHashCode();
 
         public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other) => other is MyCustomOptionsExtensionInfo;
 
         public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
         {
-            debugInfo["MyCustom:ConnectionString"] = Extension.ConnectionString;
+            debugInfo["MyCustom:ConnectionString"] = ConnectionString;
         }
 
         public override MyCustomOptionsExtension Extension => (MyCustomOptionsExtension)base.Extension;
+        private string? ConnectionString => Extension.Connection == null ? 
+                                                ConnectionString : 
+                                                Extension.Connection.ConnectionString;
     }
 
 }
