@@ -1,6 +1,4 @@
-﻿using EFCore.MyCustom.Storage;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage;
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EFCore.MyCustom.Infrastructure.Internal;
@@ -10,26 +8,19 @@ public class MyCustomOptionsExtension : RelationalOptionsExtension
     private MyCustomOptionsExtensionInfo? _info;
 
     public MyCustomOptionsExtension() { }
-    protected MyCustomOptionsExtension(MyCustomOptionsExtension copyFrom)
+    protected internal MyCustomOptionsExtension(MyCustomOptionsExtension copyFrom)
         : base(copyFrom)
     {
-        
+
     }
 
     public override DbContextOptionsExtensionInfo Info => _info ??= new MyCustomOptionsExtensionInfo(this);
 
     public override void ApplyServices(IServiceCollection services)
     {
-        services.AddEntityFrameworkMyCustom();        
-        services.AddSingleton<IRelationalConnectionFactory>(provider =>
-        {
-            //var typeMapper = provider.GetService<IRelationalTypeMappingSource>();
-            return new MyCustomConnectionFactory(ConnectionString);
-        });
-
-        
+        services.AddEntityFrameworkMyCustom();
     }
-       
+
 
 
     public override void Validate(IDbContextOptions options)
@@ -61,8 +52,8 @@ public class MyCustomOptionsExtension : RelationalOptionsExtension
         }
 
         public override MyCustomOptionsExtension Extension => (MyCustomOptionsExtension)base.Extension;
-        private string? ConnectionString => Extension.Connection == null ? 
-                                                ConnectionString : 
+        private string? ConnectionString => Extension.Connection == null ?
+                                                ConnectionString :
                                                 Extension.Connection.ConnectionString;
     }
 
