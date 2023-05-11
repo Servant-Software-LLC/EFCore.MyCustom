@@ -43,7 +43,7 @@ Detailed Implementations
 
 This section provides sub-sections that walk you through what is required for a basic EF Core Provider. By the end of each sub-section, you should be able to compile your provider. Successful complitation (and passing unit tests, in the last sub-section), helps serve as checkpoints to indicate that you are properly implementing your provider. The result of completing each sub-section is represented in [branches](https://github.com/Servant-Software-LLC/EFCore.MyCustom/branches) of the [this repo](https://github.com/Servant-Software-LLC/EFCore.MyCustom).
 
-### Options Extension Class (Step #1)
+### Get Started with a Project and a Few Classes (Step #1)
 
 As a starting point, we’ll create our project, add references to the libraries that we need, get a few classes (that are needed in later steps) in place:
 
