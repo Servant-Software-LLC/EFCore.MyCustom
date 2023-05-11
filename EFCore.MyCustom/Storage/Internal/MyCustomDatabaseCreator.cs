@@ -10,7 +10,6 @@ public class MyCustomDatabaseCreator : RelationalDatabaseCreator
 
     public MyCustomDatabaseCreator(
         RelationalDatabaseCreatorDependencies dependencies,
-        IRelationalConnectionFactory connectionFactory,
         IRawSqlCommandBuilder rawSqlCommandBuilder)
         : base(dependencies)
     {
