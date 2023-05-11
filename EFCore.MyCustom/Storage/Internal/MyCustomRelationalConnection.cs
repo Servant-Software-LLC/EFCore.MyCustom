@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data.Common;
 
-namespace EFCore.MyCustom.Diagnostics.Internal;
+namespace EFCore.MyCustom.Storage.Internal;
 
-public class CustomMySqlConnection : RelationalConnection
+public class MyCustomRelationalConnection : RelationalConnection, IMyCustomRelationalConnection
 {
-    public CustomMySqlConnection(RelationalConnectionDependencies dependencies)
+    public MyCustomRelationalConnection(RelationalConnectionDependencies dependencies)
         : base(dependencies)
     {
     }
