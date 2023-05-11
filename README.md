@@ -94,4 +94,6 @@ Now that all the essential classes for CRUD operations in your provider have bee
     
 2.  Implement [**MyCustomServiceCollectionExtensions**](https://github.com/Servant-Software-LLC/EFCore.MyCustom/blob/BasicProvider_Step_%234_of_4/EFCore.MyCustom/Extensions/MyCustomServiceCollectionExtensions.cs).
     
-3.  Add our the [**Getting Started unit tests**](https://github.com/Servant-Software-LLC/EFCore.MyCustom/tree/BasicProvider_Step_%234_of_4/EFCore.MyCustom.Tests) to exercise our provider. Of course, these unit tests are very minimal and you’ll need to build unit tests that are specialized for your specific provider.
+3.  Finally, we can implement [**MyCustomOptionsExtension**](https://github.com/Servant-Software-LLC/EFCore.MyCustom/blob/BasicProvider_Step_%234_of_4/EFCore.MyCustom/Infrastructure/Internal/MyCustomOptionsExtension.cs). Add the necessary services and settings that are specific to your ADO.NET Provider.
+
+4.  Add our the [**Getting Started unit tests**](https://github.com/Servant-Software-LLC/EFCore.MyCustom/tree/BasicProvider_Step_%234_of_4/EFCore.MyCustom.Tests) to exercise our provider. Of course, these unit tests are very minimal and you’ll need to build unit tests that are specialized for your specific provider.
