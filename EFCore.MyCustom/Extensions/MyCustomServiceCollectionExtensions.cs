@@ -32,12 +32,17 @@ public static class MyCustomServiceCollectionExtensions
 
             .TryAdd<IQuerySqlGeneratorFactory, MyCustomQuerySqlGeneratorFactory>()
 
+            .TryAddProviderSpecificServices(m => m
+                    .TryAddScoped<IMyCustomRelationalConnection, MyCustomRelationalConnection>()
+            )
+
+            .TryAdd<IRelationalConnection>(p => p.GetService<IMyCustomRelationalConnection>())
         ;
 
         builder.TryAddCoreServices();
 
         serviceCollection
-            .AddScoped<IRelationalConnection, CustomMySqlConnection>()
+            .AddScoped<IRelationalConnection, MyCustomRelationalConnection>()
             .AddSingleton<ISqlGenerationHelper, RelationalSqlGenerationHelper>()
             .AddScoped<IRelationalDatabaseCreator, MyCustomDatabaseCreator>();
 
