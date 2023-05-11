@@ -22,7 +22,7 @@ To implement a basic custom Entity Framework Core Data Provider, you'll need to 
 
 1.  `MyCustomTypeMappingSource`: A custom implementation of [RelationalTypeMappingSource](https://learn.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.storage.relationaltypemappingsource?view=efcore-6.0) that maps CLR types to the corresponding SQLite data types and vice versa.
     
-2.  `MyCustomConnectionFactory`: A custom implementation of `IRelationalConnectionFactory` that creates and returns instances of `MySqlConnection`, which are used to connect to the SQLite database.
+2.  `MyCustomConnection`: A custom implementation of `RelationalConnection` that creates and returns instances of `SqliteConnection`, which are used to connect to the SQLite database.
     
 3.  DbContext extension method: An extension method for [DbContextOptionsBuilder](https://learn.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontextoptionsbuilder?view=efcore-6.0) that allows users to configure the custom SQLite provider when setting up their `DbContext`.
     
@@ -45,9 +45,10 @@ This section provides sub-sections that walk you through what is required for a 
 
 ### Options Extension Class (Step #1)
 
-As a starting point, we’ll add references to the libraries that we need, get a few classes (that `MyCustomOptionsExtension` needs) in place and implement the `MyCustomOptionsExtension` class:
+As a starting point, we’ll create our project, add references to the libraries that we need, get a few classes (that are needed in later steps) in place:
 
-1.  Add the necessary NuGet packages for EF Core and your ADO.NET Provider:
+1.  Create the C# class library for your custom provider.
+2.  Add the necessary NuGet packages for EF Core and your ADO.NET Provider:
     
     *   `Microsoft.EntityFrameworkCore`
         
@@ -57,12 +58,9 @@ As a starting point, we’ll add references to the libraries that we need, get a
         
 2.  Implement [**MyCustomTypeMappingSource**](https://github.com/Servant-Software-LLC/EFCore.MyCustom/blob/BasicProvider_Step_%231_of_4/EFCore.MyCustom/Storage/Internal/MyCustomTypeMappingSource.cs) and define all CLR to database types.
     
-3.  Implement [**IRelationalConnectionFactory**](https://github.com/Servant-Software-LLC/EFCore.MyCustom/blob/BasicProvider_Step_%231_of_4/EFCore.MyCustom/Storage/IRelationalConnectionFactory.cs) and [**MyCustomConnectionFactory**](https://github.com/Servant-Software-LLC/EFCore.MyCustom/blob/BasicProvider_Step_%231_of_4/EFCore.MyCustom/Storage/MyCustomConnectionFactory.cs) that merely constructs an instance of your ADO.NET Connection class by providing it with the current connection string.
-    
-4.  Finally, we can implement [**MyCustomOptionsExtension**](https://github.com/Servant-Software-LLC/EFCore.MyCustom/blob/BasicProvider_Step_%231_of_4/EFCore.MyCustom/Infrastructure/Internal/MyCustomOptionsExtension.cs). Add the necessary services and settings that are specific to your ADO.NET Provider.
-    
-
-At this point, you should be able to build your provider. Nothing is wired up, so you will not yet be able to do anything with it.
+3.  Implement [**IMyCustomRelationalConnection**](https://github.com/Servant-Software-LLC/EFCore.MyCustom/blob/BasicProvider_Step_%231_of_4/EFCore.MyCustom/Storage/Internal/IMyCustomRelationalConnection.cs) and [**MyCustomRelationalConnection**](https://github.com/Servant-Software-LLC/EFCore.MyCustom/blob/BasicProvider_Step_%231_of_4/EFCore.MyCustom/Storage/Internal/MyCustomRelationalConnection.cs) that merely constructs an instance of your ADO.NET Connection class by providing it with the current connection string that was dependency injected into it by the RelationalConnectionDependencies instance.
+        
+At this point, you should be able to build your provider. Nothing is wired up and many classes are still missing, so you will not yet be able to do anything with it.
 
 ### Boilerplate Classes (Step #2)
 
