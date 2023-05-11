@@ -26,8 +26,8 @@ public class MyCustomOptionsExtension : RelationalOptionsExtension
         
         services.AddSingleton<IRelationalConnectionFactory>(provider =>
         {
-            var typeMapper = provider.GetService<IRelationalTypeMappingSource>();
-            return new MyCustomConnectionFactory(ConnectionString, typeMapper);
+            //var typeMapper = provider.GetService<IRelationalTypeMappingSource>();
+            return new MyCustomConnectionFactory(ConnectionString);
         });
 
         
