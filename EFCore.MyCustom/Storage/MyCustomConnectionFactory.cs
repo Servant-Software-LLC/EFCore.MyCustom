@@ -7,12 +7,12 @@ namespace EFCore.MyCustom.Storage;
 internal class MyCustomConnectionFactory : IRelationalConnectionFactory
 {
     private readonly string _connectionString;
-    private readonly IRelationalTypeMappingSource _typeMapper;
+    //private readonly IRelationalTypeMappingSource _typeMapper;
 
-    public MyCustomConnectionFactory(string connectionString, IRelationalTypeMappingSource typeMapper)
+    public MyCustomConnectionFactory(string connectionString /*, IRelationalTypeMappingSource typeMapper */)
     {
         _connectionString = connectionString;
-        _typeMapper = typeMapper;
+        //_typeMapper = typeMapper;
     }
 
     public DbConnection CreateConnection()
