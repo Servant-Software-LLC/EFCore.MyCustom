@@ -53,7 +53,7 @@ public class MyCustomOptionsExtension : RelationalOptionsExtension
 
         public override MyCustomOptionsExtension Extension => (MyCustomOptionsExtension)base.Extension;
         private string? ConnectionString => Extension.Connection == null ?
-                                                ConnectionString :
+                                                Extension.ConnectionString :
                                                 Extension.Connection.ConnectionString;
     }
 
